@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.homework.mower.domain.Direction;
 import com.homework.mower.domain.instruction.Instructions;
+import com.homework.mower.domain.instruction.IdentityInstruction;
 import com.homework.mower.domain.instruction.Instruction;
 import com.homework.mower.domain.Lawn;
 import com.homework.mower.domain.Mower;
@@ -22,6 +23,15 @@ public class Game {
     this.mowers = mowers;
   }
 
+
+  /**
+   * 
+   * Another way to do this will be => 
+   * instructions.getInstructions()
+      .stream()
+      .reduce(new IdentityInstruction(), (first, second) -> second.andThen(first))
+      .apply(mower, lawn);
+   */
   private Mower moveMower(Mower mower, Instructions instructions) {
     return instructions.getInstructions()
       .stream()
